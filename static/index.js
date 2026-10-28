@@ -1,0 +1,132 @@
+// Home page: keyword search with filters, plus the "Describe your problem" reverse search.
+
+const state = { page: 1, pageSize: 20 };
+const $ = (id) => document.getElementById(id);
+
+// ---- Tabs -----------------------------------------------------------------
+function showTab(name) {
+  for (const tab of ["search", "match"]) {
+    $(`tab-${tab}`).setAttribute("aria-selected", String(tab === name));
+    $(`panel-${tab}`).hidden = tab !== name;
+  }
+  history.replaceState(null, "", name === "match" ? "#match" : location.pathname + location.search);
+}
+$("tab-search").onclick = () => showTab("search");
+$("tab-match").onclick = () => showTab("match");
+
+// ---- Filters --------------------------------------------------------------
+async function loadFacets() {
+  const f = await api("/api/facets");
+  for (const i of f.institutions) {
+    $("f-institution").append(el("option", { value: i.value }, `${i.name} (${i.count})`));
+  }
+  for (const i of f.industries) {
+    $("f-industry").append(el("option", { value: i.value }, `${i.value} (${i.count})`));
+  }
+  const s = f.stats;
+  $("stats-line").textContent = s.total
+    ? `${s.total} technologies from ${f.institutions.length} research institutions · ${s.enriched} with AI business summaries`
+    : "No technologies yet. Run `python -m techbridge scrape` to load some.";
+  state.semantic = f.semantic_search;
+}
+
+for (const id of ["f-trl-min", "f-trl-max"]) {
+  $(id).append(el("option", { value: "" }, "Any"));
+  for (let n = 1; n <= 9; n++) $(id).append(el("option", { value: n }, n));
+}
+
+function currentParams() {
+  const params = new URLSearchParams();
+  const add = (key, value) => value && params.set(key, value);
+  add("q", $("q").value.trim());
+  add("institution", $("f-institution").value);
+  add("industry", $("f-industry").value);
+  add("difficulty", $("f-difficulty").value);
+  add("trl_min", $("f-trl-min").value);
+  add("trl_max", $("f-trl-max").value);
+  return params;
+}
+
+// Restore filters from the URL so searches are linkable / survive back-navigation.
+function restoreParams() {
+  const p = new URLSearchParams(location.search);
+  $("q").value = p.get("q") || "";
+  for (const [key, id] of [["institution", "f-institution"], ["industry", "f-industry"],
+                           ["difficulty", "f-difficulty"], ["trl_min", "f-trl-min"], ["trl_max", "f-trl-max"]]) {
+    $(id).value = p.get(key) || "";
+  }
+  state.page = Number(p.get("page")) || 1;
+}
+
+// ---- Search ---------------------------------------------------------------
+async function runSearch() {
+  const params = currentParams();
+  if (state.page > 1) params.set("page", state.page);
+  history.replaceState(null, "", params.toString() ? `?${params}` : location.pathname);
+
+  params.set("page", state.page);
+  params.set("page_size", state.pageSize);
+  const data = await api(`/api/technologies?${params}`);
+
+  $("result-count").textContent = `${data.total} technolog${data.total === 1 ? "y" : "ies"}`;
+  $("results").replaceChildren(
+    ...(data.results.length ? data.results.map(techCard)
+      : [el("div", { class: "empty" }, "No technologies match. Try fewer words or clear the filters.")]));
+  renderPager(data);
+}
+
+function renderPager({ total, page, page_size }) {
+  const pages = Math.ceil(total / page_size);
+  if (pages <= 1) return $("pager").replaceChildren();
+  const go = (p) => { state.page = p; runSearch(); window.scrollTo({ top: 0, behavior: "smooth" }); };
+  const prev = el("button", { disabled: page <= 1 }, "← Previous");
+  const next = el("button", { disabled: page >= pages }, "Next →");
+  prev.onclick = () => go(page - 1);
+  next.onclick = () => go(page + 1);
+  $("pager").replaceChildren(prev, el("span", {}, `Page ${page} of ${pages}`), next);
+}
+
+$("search-form").onsubmit = (e) => { e.preventDefault(); state.page = 1; runSearch(); };
+for (const id of ["f-institution", "f-industry", "f-difficulty", "f-trl-min", "f-trl-max"]) {
+  $(id).onchange = () => { state.page = 1; runSearch(); };
+}
+$("clear-filters").onclick = () => {
+  for (const id of ["f-institution", "f-industry", "f-difficulty", "f-trl-min", "f-trl-max"]) $(id).value = "";
+  state.page = 1;
+  runSearch();
+};
+
+// ---- Reverse search -------------------------------------------------------
+$("match-form").onsubmit = async (e) => {
+  e.preventDefault();
+  const problem = $("problem").value.trim();
+  if (problem.length < 3) return;
+  $("match-btn").disabled = true;
+  $("match-btn").textContent = "Searching…";
+  try {
+    const data = await api("/api/match", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ problem, limit: 10 }),
+    });
+    $("match-mode").replaceChildren(data.mode === "keyword"
+      ? el("div", { class: "notice" }, "Semantic matching isn't set up yet (run `python -m techbridge embed`), so these are keyword matches.")
+      : "");
+    $("match-results").replaceChildren(
+      ...(data.results.length ? data.results.map(techCard)
+        : [el("div", { class: "empty" }, "No matches found. Try describing the problem differently.")]));
+  } catch (err) {
+    $("match-results").replaceChildren(el("div", { class: "empty" }, `Something went wrong: ${err.message}`));
+  } finally {
+    $("match-btn").disabled = false;
+    $("match-btn").textContent = "Find matching technologies";
+  }
+};
+
+// ---- Start ----------------------------------------------------------------
+(async () => {
+  await loadFacets();
+  restoreParams();
+  if (location.hash === "#match") showTab("match");
+  runSearch();
+})();

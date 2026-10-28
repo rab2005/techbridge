@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TechBridge</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site">
+    <div class="inner">
+      <a class="brand" href="/">Tech<span>Bridge</span></a>
+      <span class="tagline">University technologies, explained for builders</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Find a university technology to build a business on</h1>
+      <p id="stats-line">Loading…</p>
+    </section>
+
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" id="tab-search" aria-selected="true" aria-controls="panel-search">Search</button>
+      <button class="tab" role="tab" id="tab-match" aria-selected="false" aria-controls="panel-match">Describe your problem</button>
+    </div>
+
+    <!-- Keyword search + filters -->
+    <section id="panel-search" role="tabpanel">
+      <form class="search-row" id="search-form">
+        <input type="search" id="q" placeholder="Search technologies, e.g. battery, wound healing, drone" aria-label="Search">
+        <button class="btn" type="submit">Search</button>
+      </form>
+      <div class="layout">
+        <aside class="filters">
+          <label>Institution <select id="f-institution"><option value="">All institutions</option></select></label>
+          <label>Industry <select id="f-industry"><option value="">All industries</option></select></label>
+          <label>Commercialization difficulty
+            <select id="f-difficulty">
+              <option value="">Any</option>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </label>
+          <label>Readiness level (TRL)
+            <div class="trl-row">
+              <select id="f-trl-min" aria-label="Minimum TRL"></select>
+              <span>to</span>
+              <select id="f-trl-max" aria-label="Maximum TRL"></select>
+            </div>
+          </label>
+          <button type="button" class="link-btn" id="clear-filters">Clear filters</button>
+        </aside>
+        <div>
+          <div class="meta-line" id="result-count"></div>
+          <div class="results" id="results"></div>
+          <div class="pager" id="pager"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reverse search -->
+    <section id="panel-match" role="tabpanel" hidden>
+      <form id="match-form" class="filters" style="margin-bottom:20px">
+        <label>Describe a problem your customers have, or a product you want to build
+          <textarea id="problem" placeholder="e.g. Farmers in dry regions lose crops because they can't tell when soil moisture drops"></textarea>
+        </label>
+        <div><button class="btn" type="submit" id="match-btn">Find matching technologies</button></div>
+      </form>
+      <div id="match-mode"></div>
+      <div class="results" id="match-results"></div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+  <script src="/index.js"></script>
+</body>
+</html>

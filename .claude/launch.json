@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "techbridge",
+      "runtimeExecutable": ".venv/bin/python",
+      "runtimeArgs": ["-m", "techbridge", "serve", "--port", "8000"],
+      "port": 8000
+    }
+  ]
+}

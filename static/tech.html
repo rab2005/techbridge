@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Technology · TechBridge</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site">
+    <div class="inner">
+      <a class="brand" href="/">Tech<span>Bridge</span></a>
+      <span class="tagline">University technologies, explained for builders</span>
+    </div>
+  </header>
+  <main id="content"><p class="meta-line">Loading…</p></main>
+
+  <script src="/app.js"></script>
+  <script>
+    function list(items) {
+      return el("ul", {}, items.map((i) => el("li", {}, i)));
+    }
+
+    function section(title, ...body) {
+      return el("section", { class: "section" }, el("h2", {}, title), ...body);
+    }
+
+    function render(t) {
+      document.title = `${t.title} · TechBridge`;
+      const enriched = Boolean(t.summary);
+
+      const mainCol = el("div", {},
+        enriched
+          ? section("In plain English", el("p", { class: "lead" }, t.summary))
+          : el("div", { class: "notice" }, "The AI business summary for this technology hasn't been generated yet."),
+        enriched && t.applications.length > 0 && section("Commercial applications", list(t.applications)),
+        enriched && t.target_customers.length > 0 && section("Who would buy it", list(t.target_customers)),
+        enriched && t.difficulty_reason && section("Commercialization outlook",
+          el("p", { style: "margin:0" }, t.difficulty_reason)),
+        section("Original listing", el("div", { class: "abstract" }, t.abstract || "No description available.")),
+      );
+
+      const contact = [
+        t.contact_name,
+        t.contact_email && el("a", { href: `mailto:${t.contact_email}` }, t.contact_email),
+        t.contact_phone,
+      ].filter(Boolean);
+
+      const sideCol = el("div", {},
+        section("Licensing",
+          el("dl", { class: "facts" },
+            el("dt", {}, "Institution"), el("dd", {}, t.institution_name),
+            el("dt", {}, "Status"), el("dd", {}, t.licensing_status === "available" ? "Available to license" : t.licensing_status),
+            t.case_id && [el("dt", {}, "Case ID"), el("dd", {}, t.case_id)],
+            t.published_date && [el("dt", {}, "Published"), el("dd", {}, t.published_date)],
+            t.trl && [el("dt", {}, "Est. TRL"), el("dd", {}, `${t.trl} of 9`)],
+          ),
+        ),
+        contact.length > 0 && section("Licensing contact",
+          el("div", {}, contact.map((c) => el("div", {}, c)))),
+        t.categories.length > 0 && section("Categories",
+          el("div", { class: "chips" }, t.categories.map((c) => el("span", { class: "chip plain" }, c)))),
+        section("Source",
+          el("a", { href: t.url, target: "_blank", rel: "noopener" }, "View on the institution's site ↗")),
+      );
+
+      document.getElementById("content").replaceChildren(
+        el("a", { class: "back", href: "/", onclick: "if (history.length > 1 && document.referrer.startsWith(location.origin)) { history.back(); return false; }" }, "← Back to search"),
+        el("h1", {}, t.title),
+        el("div", { style: "margin-bottom:20px" }, techChips(t)),
+        el("div", { class: "detail" }, mainCol, sideCol),
+      );
+    }
+
+    const id = new URLSearchParams(location.search).get("id");
+    api(`/api/technologies/${encodeURIComponent(id)}`)
+      .then(render)
+      .catch(() => {
+        document.getElementById("content").replaceChildren(
+          el("div", { class: "empty" }, "Technology not found. ", el("a", { href: "/" }, "Back to search")));
+      });
+  </script>
+</body>
+</html>
