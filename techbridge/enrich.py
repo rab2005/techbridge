@@ -34,8 +34,8 @@ class Enrichment(BaseModel):
 
     summary: str = Field(description="2-3 sentence plain-English summary a non-scientist "
                                      "entrepreneur would understand. No jargon.")
-    applications: list[str] = Field(description="3-5 concrete commercial applications or "
-                                                "product ideas, each under 15 words.")
+    applications: list[str] = Field(description="3-5 things a company could sell, each written as "
+                                                "'[what is sold] for [who buys it]', under 15 words.")
     target_customers: list[str] = Field(description="2-4 types of customers who would pay "
                                                     "for products built on this.")
     industry: IndustryName = Field(description="The single best-fitting industry vertical.")
@@ -43,8 +43,8 @@ class Enrichment(BaseModel):
                                              "principle) to 9 (proven in operation).")
     difficulty: Literal["low", "medium", "high"] = Field(
         description="How hard it would be for a startup to commercialize this.")
-    difficulty_reason: str = Field(description="One sentence explaining the difficulty "
-                                               "(e.g. FDA approval, capital equipment, ready to deploy).")
+    difficulty_reason: str = Field(description="One sentence naming the biggest obstacle for a founder. "
+                                           "Use 'likely' or 'may' for anything the listing does not state.")
 
 
 SYSTEM_PROMPT = """You are an analyst who helps entrepreneurs find university technologies to license.
@@ -58,7 +58,19 @@ Guidelines:
   Software, research reagents, or simple devices that could sell soon are usually "low" or "medium".
 - Estimate TRL from the evidence in the listing (lab data only is ~3-4; animal or prototype ~4-5;
   pilot or clinical data ~6-7). If unclear, be conservative.
-- Do not invent facts that are not supported by the listing."""
+- Do not invent facts that are not supported by the listing.
+- Explain every medical or technical term in everyday words the first time
+  you use it, or leave it out. For example, write "eczema" instead of
+  "atopic dermatitis".
+- Write each application as: [what is being sold] for [who buys it].
+  Good: "Eczema drug-testing service for pharmaceutical companies"
+  Bad: "Study skin inflammation mechanisms" (a research activity, nothing is sold)
+- Only list uses the listing mentions or that follow directly from it. Anything you are inferring must say "likely" or "may".
+- Don't claim things about licensing, regulation or markets that the listing doesn't state. If you're making an estimate, say so (“likely”, “may”).
+- Mention the biggest obstacle for a founder, including a small or specialized market, not just technical or regulatory hurdles. 
+- If only lab results are described, the TRL must be 4 or lower.
+- If laws may limit who can buy or use the technology, say so, and do not list customers who may not be allowed to use it.
+"""
 
 MAX_ABSTRACT_CHARS = 6000
 

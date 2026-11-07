@@ -1,0 +1,179 @@
+            title = A Transgenic Mouse Model of Atopic Dermatitis, Skin Remodeling, and Atopic March
+          summary = Johns Hopkins researchers created genetically modified mice that develop atopic dermatitis-like skin inflammation when a specific immune protein (IL-13) is activated. The mice naturally progress to airway sensitivity, mimicking the real disease pattern in humans. This model helps researchers understand why atopic dermatitis develops and test new drug candidates.
+     applications = ["Screen novel anti-IL-13 therapeutics for atopic dermatitis efficacy", "Test combination therapies for chronic inflammatory skin diseases", "Evaluate preventive treatments that block atopic march progression", "Study skin fibrosis and remodeling mechanisms for scar prevention", "Validate biomarkers predicting atopic dermatitis severity and flare patterns"]
+ target_customers = ["Pharmaceutical companies developing dermatology drugs", "Biotechnology firms focused on inflammatory diseases", "Contract research organizations performing preclinical studies", "Academic research institutions studying atopic disease pathways"]
+         industry = Research Tools & Lab Methods
+              trl = 5
+       difficulty = low
+difficulty_reason = Established mouse model with published proof-of-concept; readily licensable to researchers without regulatory barriers.
+
+            title = Liver-targeted mRNA lipid nanoparticle design
+          summary = Johns Hopkins has engineered a new lipid nanoparticle (LNP) design that delivers mRNA more efficiently to liver cells than current solutions. It uses a ligand-targeting approach that works even in normal animals and requires lower doses, potentially reducing toxicity and manufacturing costs. The platform is validated in mice with clinically relevant payloads like PCSK9 gene editors.
+     applications = ["PCSK9 base editing therapy for high cholesterol treatment", "Hemophilia gene therapy by delivering clotting factor mRNA to liver", "Familial hypercholesterolemia genetic correction in hepatocytes", "Urea cycle disorder treatment via liver-targeted enzyme replacement", "Hepatitis C functional cure through liver-delivered antiviral RNAi"]
+ target_customers = ["Pharmaceutical companies developing mRNA and gene-editing therapeutics", "Biotech firms focused on rare genetic liver diseases", "Contract manufacturers of lipid nanoparticle delivery systems", "Clinical diagnostics and research institutions validating LNP platforms"]
+         industry = Therapeutics & Drug Delivery
+              trl = 4
+       difficulty = high
+difficulty_reason = Requires extensive IND-enabling studies, large animal models, manufacturing scale-up, and eventual FDA approval for systemic gene therapy products, all major cost and timeline hurdles.
+
+            title = Antibody-Free Spatial Proteomics via Multiplexed On-Tissue Chemical Labeling and Mass Spectrometry
+          summary = SPOT is a new technique that maps thousands of proteins directly on tissue slides while keeping track of exactly where each protein is located. Unlike antibody-based methods limited to testing a few specific proteins, it provides unbiased discovery of all proteins present, using standard lab equipment and TMT tags that most research facilities already have.
+     applications = ["Spatial biomarker discovery for cancer subtypes and treatment response prediction", "Tumor microenvironment profiling to identify immune cell and stroma signatures", "Drug target validation by mapping receptor and pathway protein distribution in tissue", "Clinical decision support tools for cancer diagnosis and prognosis from archived tissue samples", "Research platform for pharmaceutical companies screening drug candidates against tissue proteomes"]
+ target_customers = ["Cancer diagnostic laboratories and pathology centers", "Pharmaceutical R&D teams developing oncology drugs", "Clinical research organizations running biomarker studies", "Hospital systems with existing mass spectrometry infrastructure", "Academic medical centers studying tumor biology"]
+         industry = Diagnostics & Medical Devices
+              trl = 5
+       difficulty = medium
+difficulty_reason = Requires validation as a clinical assay and integration into diagnostic workflows, but uses existing standard equipment and reagents available in core facilities.
+
+            title = Faster Production of Retinal Cells for Vision-Restoring Therapies
+          summary = Johns Hopkins has developed a method to produce retinal photoreceptor cells 20–40 days faster by adjusting culture conditions, cutting production time from 150–200 days to roughly 110–160 days. This reduces manufacturing costs and contamination risk for cell therapies targeting blindness diseases like macular degeneration and retinitis pigmentosa, and enables faster drug screening research.
+     applications = ["Accelerate manufacturing timelines and reduce costs for retinal cell therapy production", "Enable faster drug screening and disease modeling using retinal organoids", "Improve batch consistency and reduce contamination in cell therapy manufacturing", "License technology to retinal therapy developers as a process improvement", "Supply research institutions with faster-produced retinal cells for vision research"]
+ target_customers = ["Retinal cell therapy developers and biopharmaceutical companies", "Contract manufacturing organizations (CMOs) producing cell therapies", "Research institutions studying retinal degeneration and vision loss", "Pharmaceutical companies screening drugs for eye disease"]
+         industry = Therapeutics & Drug Delivery
+              trl = 5
+       difficulty = high
+difficulty_reason = Retinal cell therapies require FDA approval as human therapeutics, extensive manufacturing validation, and clinical testing before commercialization.
+
+            title = Drone Threat Mitigation System for Commercially Available Autonomous Drones
+          summary = A radiofrequency-based system that disables autonomous drones by exploiting a known vulnerability affecting over 70% of the commercial drone market. Unlike Wi-Fi jamming, it works on drones that operate autonomously and requires minimal hardware to deploy. The technology has been tested on popular DJI models and targets a flaw manufacturers have stated they won't patch.
+     applications = ["Counter-drone defense system for airports and critical infrastructure", "Military base perimeter protection against autonomous drone threats", "Law enforcement tool for disabling suspect drones during operations", "Commercial drone fence system for prisons and secure facilities", "Event security system protecting crowds from aerial threats"]
+ target_customers = ["Military and defense contractors", "Airport operators and critical infrastructure managers", "Law enforcement agencies and federal security services", "Prison and corrections departments", "Private security firms protecting high-value facilities"]
+         industry = Aerospace & Defense
+              trl = 5
+       difficulty = medium
+difficulty_reason = Requires regulatory approval (FCC) for RF transmission, integration with detection/tracking systems, and validation across diverse drone models and field conditions.
+
+            title = Automated Software for Accurate and Reproducible Breast Lesion Image Scoring
+          summary = Johns Hopkins has developed software that automatically analyzes breast ultrasound images and scores lesions in seconds instead of minutes, with transparent reasoning that doctors can verify. It reduces unnecessary biopsies by reliably identifying benign lesions while eliminating the inconsistency that occurs when different radiologists read the same scan manually.
+     applications = ["Decision support software integrated into hospital ultrasound machines and PACS systems", "Standalone web-based platform for breast imaging centers to score lesions faster", "Teleradiology service using the software to provide consistent remote lesion assessment", "Quality assurance tool to flag reader disagreement and improve radiologist training", "Clinical trial platform for validating lesion scoring consistency across sites"]
+ target_customers = ["Hospitals and breast imaging centers", "Radiology groups and independent diagnostic imaging centers", "Teleradiology service providers", "Ultrasound equipment manufacturers seeking AI add-ons"]
+         industry = Diagnostics & Medical Devices
+              trl = 5
+       difficulty = medium
+difficulty_reason = Requires FDA clearance as software for medical imaging (likely 510(k) pathway), but works with approved equipment and has clinical validation data supporting claims.
+
+            title = GBA1-deficient human cell line for the study of Parkinson’s Disease
+          summary = Johns Hopkins has created a specialized human brain cell line missing the GBA1 gene using CRISPR technology. This cell line is the only one of its kind available and lets researchers study how GBA1 deficiency causes Parkinson's disease and related brain disorders. It fills a critical gap for labs investigating α-synuclein aggregation.
+     applications = ["Sell to Parkinson's research labs as a validated disease model", "License to pharmaceutical companies screening drug candidates", "Provide to biotech firms developing \u03b1-synucleinopathy therapeutics", "Supply to contract research organizations running neurodegenerative studies", "Offer to academic institutions studying protein aggregation mechanisms"]
+ target_customers = ["Pharmaceutical R&D departments focused on neurodegeneration", "Academic research labs studying Parkinson's disease", "Contract research organizations (CROs) serving biotech", "Biotechnology companies developing neurological therapeutics"]
+         industry = Research Tools & Lab Methods
+              trl = 6
+       difficulty = low
+difficulty_reason = Product is fully developed, ready to sell, and requires minimal regulatory oversight as a research reagent.
+
+            title = Mucus-penetrating LNPs for Application in mRNA Delivery to the Female Reproductive Tract
+          summary = Johns Hopkins has engineered special nanoparticles that can carry mRNA through the thick mucus layer in the vagina and cervix, enabling localized drug delivery for contraception or STI prevention. Current treatments fail because they cannot penetrate this natural barrier effectively. This technology opens the door to safer, easier-to-use vaginal medicines.
+     applications = ["mRNA-based contraceptive gel or insert for female self-administration", "Preventive vaginal treatment against HPV, chlamydia, or gonorrhea infections", "Post-exposure prophylaxis for STI prevention after unprotected intercourse", "Long-acting vaginal implant releasing mRNA-encoded immune factors", "Dual-action product combining contraception with STI protection"]
+ target_customers = ["Family planning and reproductive health organizations in developing nations", "Pharmaceutical companies focused on women's sexual health", "Public health agencies seeking accessible STI prevention tools", "Fertility clinics and OB/GYN medical practices"]
+         industry = Therapeutics & Drug Delivery
+              trl = 5
+       difficulty = high
+difficulty_reason = mRNA therapeutics require regulatory approval (FDA or international equivalent) and clinical trials to prove safety and efficacy in humans.
+
+            title = Brain Tumor Delineation via MRI-Based Cancer Metabolism Mapping
+          summary = This is a software tool that analyzes specialized MRI scans to create a detailed, confidence-scored map showing where glioblastoma tumor cells likely exist based on abnormal metabolism, helping surgeons see tumor boundaries more clearly. It works with existing MRI machines without new hardware, uses transparent statistics instead of black-box AI, and has shown promise in early patient testing.
+     applications = ["Surgical planning software to define glioblastoma resection margins pre-operatively", "Radiation therapy planning tool for precision tumor targeting and dose mapping", "Post-treatment monitoring system to detect tumor recurrence or residual disease", "Clinical decision support for chemotherapy patient selection and dosing"]
+ target_customers = ["Neurosurgical centers and academic medical centers", "Radiation oncology departments and cancer centers", "Neuro-oncology groups and brain tumor specialists", "Hospital imaging and radiology departments"]
+         industry = Diagnostics & Medical Devices
+              trl = 5
+       difficulty = high
+difficulty_reason = Requires clinical validation in larger patient cohorts, regulatory clearance (510k or PMA), integration with hospital MRI systems, and physician adoption in a specialized field.
+
+            title = Anesthesia Free Sudomotor Imaging Platform for Quantitative Autonomic Phenotyping in Awake Mice
+          summary = Johns Hopkins developed the first anesthesia-free system to measure sweat production in awake mice, using automated imaging and AI analysis to quantify sympathetic nerve activity. This fills a critical gap in drug development by providing a validated animal model that matches clinical sudomotor tests used in humans, enabling researchers to test new hyperhidrosis and autonomic nervous system therapies before human trials.
+     applications = ["Preclinical drug screening for hyperhidrosis and autonomic neuropathy therapeutics", "Reference standard for deodorant and antiperspirant efficacy validation", "Sweat gland dysfunction phenotyping in genetic and disease models", "Biomarker discovery for sympathetic hyperactivity disorders", "CRO service offering sudomotor assays to pharmaceutical companies"]
+ target_customers = ["Pharmaceutical companies developing autonomic and hyperhidrosis drugs", "Contract research organizations (CROs) offering preclinical services", "Cosmetics and personal care companies (deodorant, antiperspirant makers)", "Academic research institutions studying autonomic function", "Medical device companies developing wearable biosensors"]
+         industry = Research Tools & Lab Methods
+              trl = 6
+       difficulty = medium
+difficulty_reason = Software hardening and multi-site validation needed; regulatory pathway for research-use kit is straightforward but commercialization requires CRO partnerships or kit distribution infrastructure.
+
+            title = RNA-Based Diagnostic Scoring Tool for Kidney Cancer Risk Assessment and Treatment Guidance
+          summary = Johns Hopkins researchers developed an RNA-based test that scores kidney cancer tumors on their aggressiveness and likely progression, using existing tissue samples. Unlike current methods that assign a single risk category, this tool gives a continuous score across multiple biological patterns, helping doctors decide whether patients need chemotherapy after surgery or which treatment to use for advanced cancer.
+     applications = ["Companion diagnostic guiding adjuvant chemotherapy decisions post-nephrectomy", "Metastatic RCC treatment selection tool for immunotherapy versus targeted therapy", "FFPE-compatible RNA panel for hospital pathology labs", "Risk stratification software for clinical tumor boards", "Precision oncology platform integrated with electronic health records"]
+ target_customers = ["Cancer centers and hospital pathology departments", "Oncology practices treating kidney cancer patients", "Diagnostic laboratory companies (Quest, LabCorp, Invitae)", "Pharma sponsors of kidney cancer immunotherapy trials", "Urology practices managing post-surgical surveillance"]
+         industry = Diagnostics & Medical Devices
+              trl = 4
+       difficulty = high
+difficulty_reason = Requires clinical validation, regulatory clearance (LDT or companion diagnostic pathway), and reimbursement codes before meaningful revenue.
+
+            title = Antitumor Effects Generated by pNGVL4a-Sig/E7 (detox)/HSP70 DNA Vaccine Administered Through Gene Gun, Biojector and Syringe
+          summary = This is a DNA vaccine that trains the immune system to attack cells infected with HPV-16, a virus that causes cervical cancer and head-and-neck cancers. The vaccine uses a heat shock protein to boost immune response and can be delivered via injection or gene gun. Early animal studies show strong tumor-fighting effects.
+     applications = ["Therapeutic vaccine for HPV-16-positive cervical cancer patients", "Treatment for HPV-associated head and neck squamous cell carcinoma", "Preventive vaccine for high-grade cervical lesions before cancer development", "Combination therapy with checkpoint inhibitors for advanced HPV cancers", "Platform technology for other HPV types (18, 31, 45) and non-HPV tumors"]
+ target_customers = ["Oncology pharmaceutical companies", "Vaccine manufacturers and developers", "Hospital cancer treatment centers", "Gynecology and otolaryngology clinics", "Contract research organizations conducting immunotherapy trials"]
+         industry = Therapeutics & Drug Delivery
+              trl = 5
+       difficulty = high
+difficulty_reason = Requires FDA approval for clinical use, multiple Phase I/II trials already proposed, complex manufacturing of DNA vaccines, and significant regulatory pathway for cancer immunotherapy.
+
+            title = Inhibition of TGFb Activity in the Subchondral Bone as a Therapy for Osteoarthritis
+          summary = Johns Hopkins researchers discovered that excess TGF-beta activity in the subchondral bone (the layer beneath cartilage) drives osteoarthritis progression. They developed an antibody that blocks this activity and reduced disease markers in mouse models, offering a potential disease-modifying treatment rather than just symptom relief for the 100 million people with osteoarthritis globally.
+     applications = ["Intra-articular antibody injection to slow or halt osteoarthritis in knees and hips", "Small molecule inhibitor targeting TGF-beta in bone for oral or topical delivery", "Diagnostic biomarker test to identify at-risk osteoarthritis patients for early intervention", "Combination therapy with existing pain relievers to prevent disease progression", "Preventative treatment for high-risk patients (post-injury, genetic predisposition)"]
+ target_customers = ["Orthopedic surgeons and rheumatologists treating osteoarthritis patients", "Large pharmaceutical companies focused on joint diseases and aging-related conditions", "Patients with early-stage or progressive osteoarthritis seeking disease-modifying options", "Hospital systems managing chronic joint disease costs"]
+         industry = Therapeutics & Drug Delivery
+              trl = 5
+       difficulty = high
+difficulty_reason = Requires IND approval, clinical trials, and FDA clearance as a biologic therapeutic, plus manufacturing scale-up for antibody or small molecule development.
+
+            title = Chimeric L1/L2 Virus-like Particles (VLP) as Potential Broad-spectrum Human Papillomavirus (HPV) Vaccines
+          summary = A vaccine approach using engineered virus-like particles that display HPV surface proteins in a new arrangement to trigger broader immunity against multiple HPV types. Unlike current vaccines (Gardasil, Cervarix) that protect against only 4-9 HPV types, this could potentially protect against many more types that cause cervical cancer and other HPV-related cancers.
+     applications = ["Next-generation cervical cancer prevention vaccine for broader HPV coverage", "Therapeutic vaccine to treat existing HPV infections in women", "HPV vaccine for men to reduce transmission and anal/oropharyngeal cancer risk", "Combination vaccine with current HPV vaccines for enhanced protection", "Vaccine protecting against rare or emerging HPV types"]
+ target_customers = ["Global vaccine manufacturers (Merck, GSK, Sanofi)", "Public health agencies and WHO for cervical cancer prevention programs", "Developing nation health ministries seeking affordable broad-spectrum HPV protection", "Gynecology and oncology practices offering cancer prevention"]
+         industry = Therapeutics & Drug Delivery
+              trl = 4
+       difficulty = high
+difficulty_reason = Requires clinical trials, regulatory approval (FDA/EMA), and manufacturing scale-up for vaccine production.
+
+            title = A novel software package for detection and analysis of rare genomic variants
+          summary = This software detects rare disease-causing genetic variants that standard analysis tools miss, improving diagnosis of hereditary cancers and rare genetic disorders. It combines outputs from multiple existing variant-calling programs using machine learning to identify variants that any single tool would overlook, without requiring new sequencing data.
+     applications = ["Add-on module for clinical genomics labs to improve cancer predisposition gene testing", "Cloud API for pharmaceutical companies screening trial participants for genetic eligibility", "Integration into sequencing platform pipelines to enhance standard germline analysis reports", "Variant detection upgrade for rare disease diagnostic services and genetic counseling centers", "Pharmacogenomics screening tool for precision medicine drug matching"]
+ target_customers = ["Clinical diagnostic laboratories performing genomic sequencing", "Pharmaceutical companies conducting drug trials and patient stratification", "Hospital systems and cancer centers offering hereditary cancer testing", "Genomic sequencing platforms and service providers", "Rare disease specialists and genetic testing companies"]
+         industry = Software & AI
+              trl = 6
+       difficulty = low
+difficulty_reason = Software with validated performance, compatible with existing lab infrastructure, no regulatory barrier for research use, and multiple clear deployment pathways.
+
+            title = Improved Production of Clavulanic Acid by Genetic Engineering of Streptomyces Clavuligerus
+          summary = Johns Hopkins researchers genetically engineered the bacterium that naturally produces clavulanic acid—a critical antibiotic booster that prevents bacteria from resisting penicillin-based drugs. By disabling specific genes, they doubled production yields and tripled output when combined with arginine supplementation, offering a path to cheaper manufacturing of this essential medicine.
+     applications = ["Increase yield of clavulanic acid fermentation for generic drug manufacturers", "Reduce production costs of amoxicillin-clavulanate combination antibiotics", "License engineered strain to major pharmaceutical fermentation facilities", "Produce clavulanic acid for veterinary antibiotic formulations", "Supply clavulanic acid to specialty pharmaceutical intermediates companies"]
+ target_customers = ["Generic pharmaceutical manufacturers", "Major antibiotic producers (Pfizer, Sandoz, Fresenius Kabi)", "Contract fermentation and manufacturing organizations", "Veterinary pharmaceutical companies"]
+         industry = Therapeutics & Drug Delivery
+              trl = 5
+       difficulty = medium
+difficulty_reason = Regulatory approval needed for pharmaceutical use; scale-up from lab to industrial fermentation requires GMP compliance and validation.
+
+            title = User-friendly platform for vaginal drug and probiotic delivery
+          summary = Johns Hopkins developed a liquid vaginal delivery system that spreads evenly as a gel inside the body, delivering drugs and probiotics more effectively than creams while eliminating messy discharge and leakage. Preclinical mouse studies show it works as well as existing products but with less irritation, addressing the major complaint women have about current vaginal medications.
+     applications = ["Over-the-counter probiotic vaginal gel for yeast and bacterial infection prevention", "Prescription antibiotic delivery system for bacterial vaginosis with improved patient compliance", "Long-acting contraceptive or hormone delivery platform for women's reproductive health", "Antimicrobial treatment for preterm birth prevention in high-risk pregnancies", "Antifungal therapy for recurrent vulvovaginal candidiasis with reduced side effects"]
+ target_customers = ["Gynecologists and women's health clinics seeking better patient outcomes", "Pharmaceutical companies with existing vaginal product portfolios", "Consumer health companies marketing women's wellness products", "Fertility and maternal health clinics focused on pregnancy complications"]
+         industry = Therapeutics & Drug Delivery
+              trl = 4
+       difficulty = medium
+difficulty_reason = Requires clinical trials and regulatory approval for drug or probiotic claims, though formulation is non-invasive and manufacturing likely simpler than systemic drugs.
+
+            title = Targeted Nano-Delivery of Aurora Kinase Inhibitors for Cancer Therapy
+          summary = Johns Hopkins researchers have created an antibody-drug conjugate platform that delivers cancer-fighting Aurora kinase inhibitors directly to tumor cells using novel chemistry, allowing doses 200 times lower than standard treatment. In mouse prostate cancer models, this approach dramatically reduced tumors with only two doses and no organ toxicity, compared to conventional high-dose treatments that cause severe side effects like fatigue and infection risk.
+     applications = ["Targeted Aurora kinase inhibitor delivery for prostate cancer therapy", "ADC platform for other kinase inhibitors in multiple cancer types", "Personalized dosing strategy to reduce chemotherapy side effects", "Combination therapy with standard cancer immunotherapies", "Diagnostic imaging agent for cancer detection and monitoring"]
+ target_customers = ["Oncology pharmaceutical companies developing kinase inhibitors", "Cancer research institutions running clinical trials", "Hospital cancer centers seeking lower-toxicity treatment options", "Patients with Aurora kinase-sensitive cancers seeking better tolerability"]
+         industry = Therapeutics & Drug Delivery
+              trl = 5
+       difficulty = high
+difficulty_reason = Requires IND application, human clinical trials, and FDA approval for a new drug delivery system—a multi-year, multi-hundred-million-dollar regulatory pathway.
+
+            title = Biodegradable Nanofiber Conical Conduits for Targeted Muscle Reinnervation
+          summary = Johns Hopkins has developed biodegradable cone-shaped tubes that guide nerve regrowth after amputation surgery, reducing painful nerve tumors (neuromas) by properly aligning mismatched nerve sizes. The tubes contain a gel coating that promotes healthy nerve regeneration while preventing inflammation, addressing a major pain problem for 2 million U.S. amputees.
+     applications = ["Surgical implants for Targeted Muscle Reinnervation (TMR) procedures in amputees", "Nerve repair conduits for trauma and reconstructive surgery", "Pain reduction treatment for neuroma complications in post-amputation patients", "Peripheral nerve repair across varying nerve diameters", "Regenerative medicine devices for nerve discontinuity"]
+ target_customers = ["Orthopedic surgeons and surgical centers performing amputee care", "Hospitals with specialized limb reconstruction programs", "Prosthetics clinics treating chronic neuroma pain", "Military and Veterans Affairs medical centers"]
+         industry = Diagnostics & Medical Devices
+              trl = 4
+       difficulty = high
+difficulty_reason = Requires FDA 510(k) or PMA approval as a Class III implantable device, plus clinical trials to prove efficacy in reducing neuroma formation.
+
+            title = Particulate Drug Delivery System to Enable Targeted Ultrasound-gated Release of Neuromodulatory Agents
+          summary = Johns Hopkins has developed nanoparticles that release neuromodulatory drugs precisely when activated by focused ultrasound, enabling noninvasive brain stimulation without surgery. The particles are biodegradable, work with existing ultrasound machines, and have successfully stopped seizures in rats with no brain damage observed.
+     applications = ["Ultrasound-triggered seizure control without implanted devices or surgery", "Noninvasive pain relief by releasing analgesics to specific brain regions", "Reversible depression or anxiety treatment via targeted dopamine/serotonin release", "Migraine abatement using localized drug delivery to pain centers", "Research tool for mapping brain function via precise drug activation"]
+ target_customers = ["Neurology clinics and epilepsy treatment centers", "Neurosurgery and neuromodulation device companies", "Pharmaceutical companies developing neurological therapeutics", "Academic neuroscience research institutions"]
+         industry = Therapeutics & Drug Delivery
+              trl = 4
+       difficulty = high
+difficulty_reason = Requires FDA approval as a drug-device combination, clinical trials in humans, and manufacturing scale-up of nanoparticles with regulatory compliance.
