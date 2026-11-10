@@ -67,13 +67,25 @@ async function runSearch() {
 
   params.set("page", state.page);
   params.set("page_size", state.pageSize);
-  const data = await api(`/api/technologies?${params}`);
 
-  $("result-count").textContent = `${data.total} technolog${data.total === 1 ? "y" : "ies"}`;
-  $("results").replaceChildren(
-    ...(data.results.length ? data.results.map(techCard)
-      : [el("div", { class: "empty" }, "No technologies match. Try fewer words or clear the filters.")]));
-  renderPager(data);
+  $("result-count").textContent = "Searching…";
+  $("results").classList.add("is-loading");
+  try {
+    const data = await api(`/api/technologies?${params}`);
+
+    $("result-count").textContent = `${data.total} technolog${data.total === 1 ? "y" : "ies"}`;
+    $("results").replaceChildren(
+      ...(data.results.length ? data.results.map(techCard)
+        : [el("div", { class: "empty" }, "No technologies match. Try fewer words or clear the filters.")]));
+    renderPager(data);
+  } catch (err) {
+    $("result-count").textContent = "";
+    $("pager").replaceChildren();
+    $("results").replaceChildren(
+      el("div", { class: "empty" }, "Couldn't load results. Check your connection and try again."));
+  } finally {
+    $("results").classList.remove("is-loading");
+  }
 }
 
 function renderPager({ total, page, page_size }) {

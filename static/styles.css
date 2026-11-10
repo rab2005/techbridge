@@ -156,3 +156,5 @@ input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent); ou
 .facts dd { margin: 0; }
 .back { font-size: 14px; }
 .lead { font-size: 17px; margin: 0; }
+.ai-note { margin: 10px 0 0; font-size: 13px; color: var(--muted); }
+.results.is-loading { opacity: 0.5; transition: opacity 0.15s; }
