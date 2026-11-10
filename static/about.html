@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About · TechBridge</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+  <header class="site">
+    <div class="inner">
+      <a class="brand" href="/">Tech<span>Bridge</span></a>
+      <span class="tagline">University technologies, explained for builders</span>
+      <nav class="site-nav"><a href="/about.html" aria-current="page">About</a></nav>
+    </div>
+  </header>
+
+  <main class="about">
+    <h1>About TechBridge</h1>
+    <p class="lead">Connecting university inventions with the people who can build businesses around them.</p>
+
+    <section class="section">
+      <h2>The problem</h2>
+      <p>Universities invent countless new technologies, and most of them never get used. Usually it's not because
+        the ideas are bad. Nobody outside the lab knows they exist, or nobody can see the commercial application.
+        Researchers are experts at inventing, not at starting companies, and the entrepreneurs who could build
+        something from these inventions rarely find them. When they do, the listings are written in dense
+        scientific and legal language that hides the business opportunity.</p>
+    </section>
+
+    <section class="section">
+      <h2>What TechBridge does</h2>
+      <p>TechBridge brings technologies that universities are offering for licensing into one searchable place,
+        and summarizes each one in plain English: what it is, what you could sell, who would buy it, and how hard
+        it might be to bring to market. Search by keyword, or describe a problem you want to solve and let
+        TechBridge find technologies that match.</p>
+    </section>
+
+    <section class="section">
+      <h2>How it works</h2>
+      <ul>
+        <li>Listings come straight from each university's technology transfer office.
+          <span id="live-stats"></span></li>
+        <li>TechBridge checks for new listings every day, and marks technologies a university has removed as
+          "no longer listed".</li>
+        <li>Plain-English summaries are written by Claude, an AI model from Anthropic. They're estimates, so always
+          confirm details with the university's licensing office.</li>
+        <li>"Describe your problem" uses an open-source AI model that matches by meaning, not just keywords.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>About me</h2>
+      <p>I'm Rhett. I've always been interested in entrepreneurship, and I think it's a shame that so many
+        inventions never get used to their fullest. I built TechBridge as a project for my coding class, with help
+        from Claude Code, an AI coding assistant.</p>
+    </section>
+
+    <p><a href="/">← Start exploring technologies</a></p>
+  </main>
+
+  <script src="/app.js"></script>
+  <script>
+    // Show live counts so the page never goes out of date.
+    api("/api/facets")
+      .then((f) => {
+        const names = f.institutions.map((i) => i.name);
+        const list = names.length > 1
+          ? `${names.slice(0, -1).join(", ")}, and ${names[names.length - 1]}`
+          : names.join("");
+        document.getElementById("live-stats").textContent =
+          `Right now that's ${f.stats.total.toLocaleString()} technologies from ${list}.`;
+      })
+      .catch(() => {});
+  </script>
+</body>
+</html>

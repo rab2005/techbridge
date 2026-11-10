@@ -158,3 +158,16 @@ input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent); ou
 .lead { font-size: 17px; margin: 0; }
 .ai-note { margin: 10px 0 0; font-size: 13px; color: var(--muted); }
 .results.is-loading { opacity: 0.5; transition: opacity 0.15s; }
+
+/* Header navigation */
+.site-nav { margin-left: auto; font-size: 14px; }
+.site-nav a { color: var(--muted); }
+.site-nav a:hover, .site-nav a[aria-current="page"] { color: var(--text); }
+@media (max-width: 600px) { .tagline { display: none; } }
+
+/* About page */
+.about { max-width: 720px; }
+.about h1 { font-size: 28px; margin: 8px 0 6px; letter-spacing: -0.01em; }
+.about > .lead { color: var(--muted); margin-bottom: 24px; }
+.about .section p { margin: 0; line-height: 1.65; }
+.about .section li { line-height: 1.6; margin-bottom: 8px; }
