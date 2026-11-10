@@ -1,5 +1,7 @@
 # TechBridge
 
+[![Tests](https://github.com/rab2005/techbridge/actions/workflows/tests.yml/badge.svg)](https://github.com/rab2005/techbridge/actions/workflows/tests.yml)
+
 **AI-powered technology transfer discovery.** TechBridge collects technologies that universities have made available for licensing, uses AI to explain each one in plain English for entrepreneurs, and lets you search by keyword or by describing a business problem.
 
 ## How it works
