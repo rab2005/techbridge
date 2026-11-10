@@ -29,6 +29,7 @@ function techChips(t) {
     t.industry && el("span", { class: "chip" }, t.industry),
     t.trl && el("span", { class: "chip plain", title: "Technology Readiness Level (1-9)" }, `TRL ${t.trl}`),
     t.difficulty && el("span", { class: `chip ${t.difficulty}` }, DIFFICULTY_LABEL[t.difficulty]),
+    t.licensing_status === "no longer listed" && el("span", { class: "chip high" }, "No longer listed"),
     !t.summary && el("span", { class: "chip plain" }, "AI summary pending"),
   );
 }

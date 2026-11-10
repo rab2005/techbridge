@@ -42,6 +42,7 @@ function currentParams() {
   add("institution", $("f-institution").value);
   add("industry", $("f-industry").value);
   add("difficulty", $("f-difficulty").value);
+  add("status", $("f-status").value);
   add("trl_min", $("f-trl-min").value);
   add("trl_max", $("f-trl-max").value);
   return params;
@@ -52,7 +53,7 @@ function restoreParams() {
   const p = new URLSearchParams(location.search);
   $("q").value = p.get("q") || "";
   for (const [key, id] of [["institution", "f-institution"], ["industry", "f-industry"],
-                           ["difficulty", "f-difficulty"], ["trl_min", "f-trl-min"], ["trl_max", "f-trl-max"]]) {
+                           ["difficulty", "f-difficulty"], ["status", "f-status"], ["trl_min", "f-trl-min"], ["trl_max", "f-trl-max"]]) {
     $(id).value = p.get(key) || "";
   }
   state.page = Number(p.get("page")) || 1;
@@ -87,11 +88,11 @@ function renderPager({ total, page, page_size }) {
 }
 
 $("search-form").onsubmit = (e) => { e.preventDefault(); state.page = 1; runSearch(); };
-for (const id of ["f-institution", "f-industry", "f-difficulty", "f-trl-min", "f-trl-max"]) {
+for (const id of ["f-institution", "f-industry", "f-difficulty", "f-status", "f-trl-min", "f-trl-max"]) {
   $(id).onchange = () => { state.page = 1; runSearch(); };
 }
 $("clear-filters").onclick = () => {
-  for (const id of ["f-institution", "f-industry", "f-difficulty", "f-trl-min", "f-trl-max"]) $(id).value = "";
+  for (const id of ["f-institution", "f-industry", "f-difficulty", "f-status", "f-trl-min", "f-trl-max"]) $(id).value = "";
   state.page = 1;
   runSearch();
 };
