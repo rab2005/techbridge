@@ -118,3 +118,13 @@ def upsert_technology(conn: sqlite3.Connection, tech: dict) -> None:
 
 def known_urls(conn: sqlite3.Connection) -> set[str]:
     return {r["url"] for r in conn.execute("SELECT url FROM technologies")}
+
+def update_listing_status(conn: sqlite3.Connection, institution: str, feed_urls: set[str]) -> None:
+    """Mark each saved technology by whether it is still in the institution's feed."""
+    rows = conn.execute("SELECT url FROM technologies WHERE institution = ?",
+                        (institution,)).fetchall()
+    for row in rows:
+        status = "available" if row["url"] in feed_urls else "no longer listed"
+        conn.execute("UPDATE technologies SET licensing_status = ? WHERE url = ?",
+                     (status, row["url"]))
+    conn.commit()

@@ -172,10 +172,12 @@ def parse_detail(html: str) -> dict:
 def scrape_institution(conn, session, slug: str, limit: int | None = None,
                        refresh: bool = False, log=print) -> int:
     """Scrape one institution. Returns the number of technologies saved."""
-    resp = session.get(config.feed_url(slug), timeout=30)
+    resp = session.get(config.feed_url(slug), timeout=120)
     resp.raise_for_status()
     listings = parse_feed(resp.text)
     log(f"[{slug}] feed lists {len(listings)} technologies")
+    if listings:
+        db.update_listing_status(conn, slug, {l["url"] for l in listings})
 
     seen = set() if refresh else db.known_urls(conn)
     todo = [l for l in listings if l["url"] not in seen]

@@ -222,3 +222,28 @@ def test_enrichment_clears_stale_embedding(conn):
     embeddings.embed_pending(conn, embedder=FakeEmbedder(), log=lambda *_: None)
     enrich.enrich_pending(conn, client=FakeClaude(), log=lambda *_: None)
     assert conn.execute("SELECT COUNT(embedding) FROM technologies").fetchone()[0] == 0
+
+def test_update_listing_status(conn):
+    def status(url):
+        return conn.execute("SELECT licensing_status FROM technologies WHERE url = ?",
+                            (url,)).fetchone()[0]
+
+    jhu_url = "https://example.edu/tech/1"
+    upenn_url = "https://example.edu/tech/2"
+
+    db.update_listing_status(conn, "jhu", set())
+    assert status(jhu_url) == "no longer listed"
+    assert status(upenn_url) == "available"  # other universities aren't touched
+
+    db.update_listing_status(conn, "jhu", {jhu_url})
+    assert status(jhu_url) == "available"  # it came back
+
+def test_empty_feed_does_not_mark_everything_gone(conn):
+    class FakeSession:
+        def get(self, url, timeout):
+            return SimpleNamespace(text="<rss><channel></channel></rss>",
+                                   raise_for_status=lambda: None)
+
+    scraper.scrape_institution(conn, FakeSession(), "jhu", log=lambda *_: None)
+    row = conn.execute("SELECT licensing_status FROM technologies WHERE institution = 'jhu'").fetchone()
+    assert row[0] == "available"
