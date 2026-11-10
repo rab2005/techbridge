@@ -247,3 +247,9 @@ def test_empty_feed_does_not_mark_everything_gone(conn):
     scraper.scrape_institution(conn, FakeSession(), "jhu", log=lambda *_: None)
     row = conn.execute("SELECT licensing_status FROM technologies WHERE institution = 'jhu'").fetchone()
     assert row[0] == "available"
+
+def test_search_filter_by_status(client, conn):
+    db.update_listing_status(conn, "jhu", set())
+    r = client.get("/api/technologies", params={"status": "no longer listed"}).json()
+    assert [t["title"] for t in r["results"]] == ["Soil moisture sensor"]
+    assert r["results"][0]["licensing_status"] == "no longer listed"

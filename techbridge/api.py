@@ -13,8 +13,8 @@ app = FastAPI(title="TechBridge")
 conn = db.connect()
 
 # Columns returned in result lists (detail pages get everything).
-LIST_COLUMNS = """t.id, t.institution, t.title, t.url, t.categories, t.summary, t.applications,
-                  t.industry, t.trl, t.difficulty, t.published_date,
+LIST_COLUMNS = """t.id, t.institution, t.title, t.url, t.categories, t.summary, t.applications, 
+                t.industry, t.trl, t.difficulty, t.licensing_status, t.published_date,
                   substr(t.abstract, 1, 320) AS abstract_snippet"""
 
 
@@ -37,6 +37,7 @@ def search_technologies(
     institution: str | None = None,
     industry: str | None = None,
     difficulty: str | None = None,
+    status: str | None = None,
     trl_min: int | None = Query(None, ge=1, le=9),
     trl_max: int | None = Query(None, ge=1, le=9),
     page: int = Query(1, ge=1),
@@ -47,7 +48,7 @@ def search_technologies(
     if match:
         where.append("technologies_fts MATCH ?")
         params.append(match)
-    for column, value in (("institution", institution), ("industry", industry), ("difficulty", difficulty)):
+    for column, value in (("institution", institution), ("industry", industry), ("difficulty", difficulty), ("licensing_status", status)):
         if value:
             where.append(f"t.{column} = ?")
             params.append(value)
