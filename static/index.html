@@ -4,7 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TechBridge</title>
-  <link rel="stylesheet" href="/styles.css">
+  <meta name="description" content="Search thousands of university inventions available for licensing, each explained in plain English for entrepreneurs.">
+  <meta name="theme-color" content="#000000">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="TechBridge">
+  <meta property="og:title" content="TechBridge: university technologies, explained for builders">
+  <meta property="og:description" content="Search thousands of university inventions available for licensing, each explained in plain English for entrepreneurs.">
+  <meta property="og:image" content="https://techbridge-ot02.onrender.com/hero.jpg">
+  <meta property="og:url" content="https://techbridge-ot02.onrender.com/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/styles.css?v=2">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 </head>
 <body>
@@ -12,7 +21,7 @@
     <div class="inner">
       <a class="brand" href="/">Tech<span>Bridge</span></a>
       <span class="tagline">University technologies, explained for builders</span>
-      <nav class="site-nav"><a href="/about.html">About</a></nav>
+      <nav class="site-nav"><a href="/random" title="Open a random technology">Random</a><a href="/about.html">About</a></nav>
     </div>
   </header>
 
@@ -20,19 +29,35 @@
     <section class="hero">
       <h1>Find a university technology to build a business on</h1>
       <p id="stats-line">Loading…</p>
-    </section>
 
-    <div class="tabs" role="tablist">
-      <button class="tab" role="tab" id="tab-search" aria-selected="true" aria-controls="panel-search">Search</button>
-      <button class="tab" role="tab" id="tab-match" aria-selected="false" aria-controls="panel-match">Describe your problem</button>
-    </div>
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" id="tab-search" aria-selected="true" aria-controls="panel-search">Search</button>
+        <button class="tab" role="tab" id="tab-match" aria-selected="false" aria-controls="panel-match">Describe your problem</button>
+      </div>
 
-    <!-- Keyword search + filters -->
-    <section id="panel-search" role="tabpanel">
       <form class="search-row" id="search-form">
         <input type="search" id="q" placeholder="Search technologies, e.g. battery, wound healing, drone" aria-label="Search">
         <button class="btn" type="submit">Search</button>
       </form>
+
+      <form id="match-form" class="match-form" hidden>
+        <textarea id="problem" aria-label="Describe a problem your customers have, or a product you want to build"
+          placeholder="Describe a problem your customers have, or a product you want to build"></textarea>
+        <div class="match-actions">
+          <div class="examples">
+            <span>Try</span>
+            <button type="button" class="example">Farmers can't tell when their soil is too dry</button>
+            <button type="button" class="example">Hospitals need faster tests for infections</button>
+            <button type="button" class="example">Electric cars take too long to charge</button>
+            <button type="button" class="example">Stopping drones from flying over prisons</button>
+          </div>
+          <button class="btn" type="submit" id="match-btn">Find matches</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Keyword search + filters -->
+    <section id="panel-search" role="tabpanel">
       <div class="layout">
         <aside class="filters">
           <label>Institution <select id="f-institution"><option value="">All institutions</option></select></label>
@@ -71,18 +96,37 @@
 
     <!-- Reverse search -->
     <section id="panel-match" role="tabpanel" hidden>
-      <form id="match-form" class="filters" style="margin-bottom:20px">
-        <label>Describe a problem your customers have, or a product you want to build
-          <textarea id="problem" placeholder="e.g. Farmers in dry regions lose crops because they can't tell when soil moisture drops"></textarea>
-        </label>
-        <div><button class="btn" type="submit" id="match-btn">Find matching technologies</button></div>
-      </form>
       <div id="match-mode"></div>
       <div class="results" id="match-results"></div>
     </section>
   </main>
 
-  <script src="/app.js"></script>
-  <script src="/index.js"></script>
+  <footer class="site-footer">
+    <div class="inner footer-grid">
+      <div>
+        <a class="brand" href="/">Tech<span>Bridge</span></a>
+        <p>University technologies, explained for builders.</p>
+      </div>
+      <nav aria-label="Footer">
+        <h4>Explore</h4>
+        <a href="/">Search</a>
+        <a href="/#match">Describe your problem</a>
+        <a href="/random">Random technology</a>
+        <a href="/about.html">About</a>
+      </nav>
+      <div>
+        <h4>About the data</h4>
+        <p>Listings come from university technology transfer offices. Each technology links back to its original page.</p>
+        <p>Summaries are generated by AI. Verify details with the university's licensing office.</p>
+      </div>
+    </div>
+    <div class="inner footer-bottom">
+      <span>Built by Rhett for CS 111 · <a href="https://github.com/rab2005/techbridge">Source on GitHub</a></span>
+      <span>Photo by <a href="https://unsplash.com/@projectmoon">@projectmoon</a> on Unsplash</span>
+    </div>
+  </footer>
+
+  <script src="/app.js?v=2"></script>
+  <script src="/index.js?v=2"></script>
 </body>
 </html>

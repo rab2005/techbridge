@@ -3,6 +3,7 @@
 import re
 
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
@@ -84,6 +85,19 @@ def get_technology(tech_id: int):
     return with_institution_name(db.row_to_dict(row))
 
 
+@app.get("/random")
+def random_technology():
+    """Send the visitor to a random technology, preferring ones that are available and summarized."""
+    row = conn.execute("""SELECT id FROM technologies
+                          ORDER BY (licensing_status = 'available' AND enriched_at IS NOT NULL) DESC, RANDOM()
+                          LIMIT 1""").fetchone()
+    if not row:
+        return RedirectResponse("/", status_code=302)
+    # no-store so the browser doesn't reuse the same redirect on the next click.
+    return RedirectResponse(f"/tech.html?id={row['id']}", status_code=302,
+                            headers={"Cache-Control": "no-store"})
+
+
 @app.get("/api/facets")
 def facets():
     def counts(column):
@@ -149,6 +163,15 @@ def match_problem(req: MatchRequest):
             WHERE technologies_fts MATCH ? ORDER BY bm25(technologies_fts) LIMIT ?""",
         (match, req.limit)).fetchall()
     return {"mode": "keyword", "results": [with_institution_name(db.row_to_dict(r)) for r in rows]}
+
+
+@app.middleware("http")
+async def revalidate_pages(request, call_next):
+    """Make browsers check for a newer version of each page, so a deploy shows up right away."""
+    response = await call_next(request)
+    if response.headers.get("content-type", "").startswith("text/html"):
+        response.headers["Cache-Control"] = "no-cache"
+    return response
 
 
 app.mount("/", StaticFiles(directory=config.ROOT / "static", html=True), name="static")

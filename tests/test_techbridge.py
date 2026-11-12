@@ -202,6 +202,18 @@ def test_match_semantic(client, conn, monkeypatch):
     assert r["results"][0]["score"] > 0.9
 
 
+def test_random_redirects_to_a_technology(client):
+    r = client.get("/random", follow_redirects=False)
+    assert r.status_code == 302
+    assert r.headers["location"] in {"/tech.html?id=1", "/tech.html?id=2"}
+
+
+def test_pages_are_revalidated(client):
+    r = client.get("/")
+    assert r.status_code == 200
+    assert r.headers["cache-control"] == "no-cache"
+
+
 def test_facets(client):
     f = client.get("/api/facets").json()
     assert f["stats"]["total"] == 2

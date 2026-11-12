@@ -8,11 +8,29 @@ function showTab(name) {
   for (const tab of ["search", "match"]) {
     $(`tab-${tab}`).setAttribute("aria-selected", String(tab === name));
     $(`panel-${tab}`).hidden = tab !== name;
+    $(`${tab}-form`).hidden = tab !== name;   // the hero shows the matching form
   }
   history.replaceState(null, "", name === "match" ? "#match" : location.pathname + location.search);
 }
 $("tab-search").onclick = () => showTab("search");
 $("tab-match").onclick = () => showTab("match");
+// The footer's "Describe your problem" link changes only the #hash when you're already on this page.
+window.addEventListener("hashchange", () => showTab(location.hash === "#match" ? "match" : "search"));
+
+// ---- Loading placeholders ------------------------------------------------
+/** Gray shimmering cards shown while results load. */
+function skeletonCards(n = 3) {
+  return Array.from({ length: n }, () => el("div", { class: "card skeleton", "aria-hidden": "true" },
+    el("div", { class: "sk sk-title" }),
+    el("div", { class: "sk sk-meta" }),
+    el("div", { class: "sk sk-line" }), el("div", { class: "sk sk-line" }), el("div", { class: "sk sk-line short" })));
+}
+
+/** Show placeholders in `container` only if loading takes long enough to notice; returns a cancel function. */
+function showSkeletonsSoon(container) {
+  const timer = setTimeout(() => container.replaceChildren(...skeletonCards()), 150);
+  return () => clearTimeout(timer);
+}
 
 // ---- Filters --------------------------------------------------------------
 async function loadFacets() {
@@ -69,7 +87,7 @@ async function runSearch() {
   params.set("page_size", state.pageSize);
 
   $("result-count").textContent = "Searching…";
-  $("results").classList.add("is-loading");
+  const cancelSkeletons = showSkeletonsSoon($("results"));
   try {
     const data = await api(`/api/technologies?${params}`);
 
@@ -84,7 +102,7 @@ async function runSearch() {
     $("results").replaceChildren(
       el("div", { class: "empty" }, "Couldn't load results. Check your connection and try again."));
   } finally {
-    $("results").classList.remove("is-loading");
+    cancelSkeletons();
   }
 }
 
@@ -116,6 +134,8 @@ $("match-form").onsubmit = async (e) => {
   if (problem.length < 3) return;
   $("match-btn").disabled = true;
   $("match-btn").textContent = "Searching…";
+  $("match-mode").replaceChildren();
+  const cancelSkeletons = showSkeletonsSoon($("match-results"));
   try {
     const data = await api("/api/match", {
       method: "POST",
@@ -131,10 +151,19 @@ $("match-form").onsubmit = async (e) => {
   } catch (err) {
     $("match-results").replaceChildren(el("div", { class: "empty" }, `Something went wrong: ${err.message}`));
   } finally {
+    cancelSkeletons();
     $("match-btn").disabled = false;
-    $("match-btn").textContent = "Find matching technologies";
+    $("match-btn").textContent = "Find matches";
   }
 };
+
+// Example problems: fill the box and search right away.
+for (const button of document.querySelectorAll(".example")) {
+  button.onclick = () => {
+    $("problem").value = button.textContent;
+    $("match-form").requestSubmit();
+  };
+}
 
 // ---- Start ----------------------------------------------------------------
 (async () => {

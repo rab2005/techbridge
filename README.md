@@ -18,6 +18,7 @@ Universities invent countless technologies, and most never get used. Usually tha
 - **Plain-English AI summaries**: summary, commercial applications, target customers, industry, technology readiness level (TRL), and commercialization difficulty
 - **Keyword search** with filters for institution, industry, difficulty, TRL, and licensing status
 - **"Describe your problem"**: type a business problem and get technologies that match by meaning, not just keywords
+- **Random technology**: one click takes you to a random invention, for browsing without a goal
 - **Listing status tracking**: technologies a university removes from its site are marked "no longer listed" instead of silently disappearing
 
 ![A technology detail page with its AI summary](docs/screenshots/detail.png)
@@ -162,4 +163,4 @@ tests/            pytest suite + HTML fixtures
 
 ## Acknowledgments
 
-Built for CS 111. I used Claude Code as a tutor throughout. Listing data belongs to the respective universities, and each technology links back to its original page.
+Built for CS 111. I used Claude Code as a tutor throughout. Listing data belongs to the respective universities, and each technology links back to its original page. Hero photo by [@projectmoon](https://unsplash.com/@projectmoon) on Unsplash.
