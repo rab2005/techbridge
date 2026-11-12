@@ -9,3 +9,6 @@ data/*.db-wal
 data/*.db-shm
 data/*.log
 data/.scrape.lock
+.fastembed_cache/
+deploy/*.db-wal
+deploy/*.db-shm

@@ -1,0 +1,21 @@
+# Render deployment settings (https://render.com/docs/blueprint-spec).
+# The website runs on Render's free plan; the daily scrape/summaries stay on the Mac,
+# and scripts/publish.sh pushes a fresh database snapshot whenever the site should update.
+services:
+  - type: web
+    name: techbridge
+    runtime: python
+    plan: free
+    # Install libraries, then download the search model once at build time
+    # so the site doesn't re-download it every time it wakes up.
+    buildCommand: >-
+      pip install -r requirements.txt &&
+      python -c "from techbridge.embeddings import default_embedder; default_embedder().model"
+    startCommand: uvicorn techbridge.api:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.14.2
+      - key: TECHBRIDGE_DB
+        value: deploy/techbridge.db
+      - key: FASTEMBED_CACHE_PATH
+        value: .fastembed_cache
