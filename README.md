@@ -4,6 +4,24 @@
 
 **AI-powered technology transfer discovery.** TechBridge collects technologies that universities have made available for licensing, uses AI to explain each one in plain English for entrepreneurs, and lets you search by keyword or by describing a business problem.
 
+**Live site: https://techbridge-ot02.onrender.com** (free hosting, so the first visit after a quiet period takes about a minute to wake up)
+
+![Searching TechBridge for "drone"](docs/screenshots/search.png)
+
+## Why I built this
+
+Universities invent countless technologies, and most never get used. Usually that's not because the ideas are bad. It's because nobody outside the lab knows they exist, and the listings are written in dense scientific and legal language that hides the business opportunity. I've always been interested in entrepreneurship, so I built TechBridge to put these inventions in one place and explain them in terms a founder can act on: what it is, what you could sell, who would buy it, and how hard it would be to bring to market.
+
+## Features
+
+- **~5,000 technologies from 5 universities**, collected automatically from their technology transfer offices and kept up to date daily
+- **Plain-English AI summaries**: summary, commercial applications, target customers, industry, technology readiness level (TRL), and commercialization difficulty
+- **Keyword search** with filters for institution, industry, difficulty, TRL, and licensing status
+- **"Describe your problem"**: type a business problem and get technologies that match by meaning, not just keywords
+- **Listing status tracking**: technologies a university removes from its site are marked "no longer listed" instead of silently disappearing
+
+![A technology detail page with its AI summary](docs/screenshots/detail.png)
+
 ## How it works
 
 ```
@@ -18,7 +36,7 @@
 |---|---|---|
 | 1. Ingestion | `techbridge/scraper.py` | Reads each university's RSS feed, then visits each technology page for the full abstract, categories, and licensing contact |
 | 2. AI enrichment | `techbridge/enrich.py` | Sends each listing to Claude (Haiku 4.5) with structured output: summary, 3–5 applications, target customers, industry, TRL (1–9), commercialization difficulty |
-| 3. Search API + UI | `techbridge/api.py`, `static/` | Keyword search (SQLite FTS5) with filters for institution, industry, difficulty, and TRL; technology detail pages |
+| 3. Search API + UI | `techbridge/api.py`, `static/` | Keyword search (SQLite FTS5) with filters for institution, industry, difficulty, TRL, and licensing status; technology detail pages |
 | 4. Reverse search | `techbridge/embeddings.py` | Embeds every technology with a small open-source model ([bge-small-en-v1.5](https://huggingface.co/BAAI/bge-small-en-v1.5)) that runs locally; a user's problem description is embedded and matched by cosine similarity |
 
 ### Data sources
@@ -82,11 +100,21 @@ scripts/schedule.sh run          # run it now
 scripts/schedule.sh uninstall
 ```
 
+## Deployment
+
+The website runs on [Render](https://render.com)'s free plan, configured in `render.yaml`. Scraping and AI summaries run on my Mac, and the website serves a snapshot of the database:
+
+```bash
+scripts/publish.sh    # copy the current database to deploy/, commit, and push
+```
+
+Render redeploys automatically on every push to `main`, so code changes go live too. GitHub Actions runs the test suite on every push (badge above).
+
 ## API
 
 | Method | Path | Description |
 |---|---|---|
-| GET | `/api/technologies?q=&institution=&industry=&difficulty=&trl_min=&trl_max=&page=` | Search and filter |
+| GET | `/api/technologies?q=&institution=&industry=&difficulty=&status=&trl_min=&trl_max=&page=` | Search and filter |
 | GET | `/api/technologies/{id}` | Full record |
 | GET | `/api/facets` | Filter options and counts |
 | POST | `/api/match` `{"problem": "...", "limit": 10}` | Reverse search |
@@ -116,9 +144,22 @@ static/           HTML/CSS/JS front end
 tests/            pytest suite + HTML fixtures
 ```
 
+## What I learned
+
+- **Scraping real websites is messy.** All five schools use the same platform, but each customizes its pages, so the parser tries several selectors per field. Saved copies of real pages in `tests/fixtures/` catch it when one breaks.
+- **Prompting is iterative.** My first prompt produced vague summaries and overconfident claims. Three rounds of testing (`docs/prompt-tests/`) taught me to give concrete good and bad examples and to require "likely" or "may" for anything the listing doesn't say. Even then, the model sometimes breaks rules, which is why every summary carries a disclaimer.
+- **Searching by meaning is different from keyword search.** Full-text search finds exact words. Embeddings find "farmers can't tell when soil is dry" → soil gas probes, even with no shared words.
+- **Tests and CI make changes safe.** I broke the listing status code on purpose and watched GitHub Actions turn red, then green after the fix.
+
 ## Roadmap
 
 - [x] Scheduled scraping (macOS launchd)
+- [x] Deploy (Render)
+- [x] Licensing status tracking
+- [x] AI summaries for every technology
 - [ ] More institutions, including schools not on Technology Publisher (e.g. MIT, Stanford)
-- [ ] Deploy (Render / Fly.io / Railway)
 - [ ] Prompt evaluation: spot-check AI summaries against the original abstracts
+
+## Acknowledgments
+
+Built for CS 111. I used Claude Code as a tutor throughout. Listing data belongs to the respective universities, and each technology links back to its original page.
