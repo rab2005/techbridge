@@ -324,8 +324,6 @@ select:has(option:checked:not([value=""])) { color: var(--accent); border-color:
   -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
 }
 .hero input[type="search"]:focus, .hero textarea:focus { background: rgba(0, 0, 0, .75); border-color: var(--accent); }
-.tabs + form, .tabs ~ form { animation: rise .9s var(--ease) .4s both; }
-.tabs { animation: rise .9s var(--ease) .35s both; }
 #panel-search, #panel-match { padding-top: 48px; }
 .match-form { max-width: 960px; }
 .match-form textarea { display: block; min-height: 110px; }
@@ -386,4 +384,44 @@ select:has(option:checked:not([value=""])) { color: var(--accent); border-color:
   .site-footer .inner { padding-left: 16px; padding-right: 16px; }
   .hero { padding-top: 64px; padding-bottom: 48px; }
   .tabs { margin-top: 36px; }
+}
+
+/* ---- Tabs + sticky search bar ------------------------------------------
+   The hero leaves room at the bottom; the tabs pull up into that space so they
+   sit on the photo. The search bar is a direct child of <main>, so it can stay
+   stuck to the top of the screen for the whole results list. It has a higher
+   z-index than the header, so when it reaches the top it slides over it. */
+:root { --overlap: 168px; }
+.hero { padding-bottom: calc(var(--overlap) + 24px); }
+.tabs { position: relative; z-index: 2; margin-top: calc(-1 * var(--overlap)); }
+.search-dock {
+  position: sticky; top: 0; z-index: 30;
+  padding: 12px 0;
+  transition: background-color .25s var(--ease), box-shadow .25s var(--ease);
+}
+.search-dock.is-stuck {
+  /* Full-width black band behind the bar while it's stuck. */
+  background: rgba(0, 0, 0, .94);
+  box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .94), 0 1px 0 100vmax var(--border);
+  clip-path: inset(0 -100vmax -1px);
+}
+.search-dock.is-stuck input[type="search"] { background: var(--surface); }
+.search-dock.is-matching { position: relative; }    /* the problem box is too tall to follow you */
+#panel-search, #panel-match { padding-top: 36px; scroll-margin-top: 96px; }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; justify-content: center; white-space: nowrap;
+  background: rgba(0, 0, 0, .45); color: var(--text); border-color: var(--border-strong); margin-left: 8px;
+}
+.btn-ghost:hover { background: transparent; color: var(--accent); border-color: var(--accent); }
+.search-row { max-width: none; }
+
+@media (max-width: 600px) {
+  :root { --overlap: 196px; }
+  .search-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .search-row input[type="search"] { grid-column: 1 / -1; }
+  .search-row .btn, .btn-ghost { min-height: 46px; margin: 0; }
+  .search-dock.is-stuck .search-row { grid-template-columns: 1fr auto auto; }
+  .search-dock.is-stuck .search-row input[type="search"] { grid-column: auto; padding: 12px; font-size: 16px; }
+  .search-dock.is-stuck .search-row .btn { padding: 0 14px; letter-spacing: .1em; }
 }

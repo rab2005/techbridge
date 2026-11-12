@@ -10,12 +10,23 @@ function showTab(name) {
     $(`panel-${tab}`).hidden = tab !== name;
     $(`${tab}-form`).hidden = tab !== name;   // the hero shows the matching form
   }
+  $("search-dock").classList.toggle("is-matching", name === "match");
+  updateDock();
   history.replaceState(null, "", name === "match" ? "#match" : location.pathname + location.search);
 }
 $("tab-search").onclick = () => showTab("search");
 $("tab-match").onclick = () => showTab("match");
 // The footer's "Describe your problem" link changes only the #hash when you're already on this page.
 window.addEventListener("hashchange", () => showTab(location.hash === "#match" ? "match" : "search"));
+
+// ---- Sticky search bar ----------------------------------------------------
+// Give the bar a solid background once it has reached the top of the screen.
+function updateDock() {
+  const dock = $("search-dock");
+  const stuck = !dock.classList.contains("is-matching") && dock.getBoundingClientRect().top <= 0;
+  dock.classList.toggle("is-stuck", stuck);
+}
+window.addEventListener("scroll", updateDock, { passive: true });
 
 // ---- Loading placeholders ------------------------------------------------
 /** Gray shimmering cards shown while results load. */
@@ -109,7 +120,7 @@ async function runSearch() {
 function renderPager({ total, page, page_size }) {
   const pages = Math.ceil(total / page_size);
   if (pages <= 1) return $("pager").replaceChildren();
-  const go = (p) => { state.page = p; runSearch(); window.scrollTo({ top: 0, behavior: "smooth" }); };
+  const go = (p) => { state.page = p; runSearch(); $("panel-search").scrollIntoView({ behavior: "smooth" }); };
   const prev = el("button", { disabled: page <= 1 }, "← Previous");
   const next = el("button", { disabled: page >= pages }, "Next →");
   prev.onclick = () => go(page - 1);
