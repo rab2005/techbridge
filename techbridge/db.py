@@ -124,7 +124,7 @@ def update_listing_status(conn: sqlite3.Connection, institution: str, feed_urls:
     rows = conn.execute("SELECT url FROM technologies WHERE institution = ?",
                         (institution,)).fetchall()
     for row in rows:
-        status = "available" if row["url"] in feed_urls else "gone"
+        status = "available" if row["url"] in feed_urls else "no longer listed"
         conn.execute("UPDATE technologies SET licensing_status = ? WHERE url = ?",
                      (status, row["url"]))
     conn.commit()
